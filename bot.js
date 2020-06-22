@@ -44,10 +44,6 @@ function showAllBirthdays() {
   var message = "";
 
   for (var month in calendar) {
-    isEmpty()
-    if(calendar[month]) {
-      console.log(`${month}`);
-    }
     message = message + `\n${month.toUpperCase()}: `;
     for (var day in calendar[month]) {
       var current_day = calendar[month][day];

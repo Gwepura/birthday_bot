@@ -1,14 +1,14 @@
 const calendar = require('./birthday_calendar');
 
 function getAllBirthdays() {
-  // var list = {};
-  //
-  // for (var month in calendar) {
-  //   if (isEmpty(calendar[month]) == false) {
-  //     list[month] = (calendar[month]);
-  //   }
-  // }
-  return calendar;
+  var list = {};
+  
+  for (var month in calendar) {
+    if (!(isEmpty(calendar[month]))) {
+      list[month] = (calendar[month]);
+    }
+  }
+  return list;
 }
 
 // function getBirthdaysByMonth(month) {
