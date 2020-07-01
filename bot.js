@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const help = require('./help');
 const birthdays = require('./birthdays');
-const helperFunctions = require('./helperFunctions');
+const helper = require('./helperFunctions');
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -60,9 +60,15 @@ function showHelp() {
 function showTodayBirthdays() {
   var calendarMonth = birthdays.getTodayBirthdays();
   var message = "";
-  if (!(helperFunctions.isEmpty(calendarMonth))) {
-    console.log(calendarMonth);
+
+  if (!(helper.isEmpty(calendarMonth))) {
+    message = `Happy birthday ${calendarMonth}!`
+  } else {
+    message = "There are no birthdays to show today."
   }
+
+  return message;
+
 }
 
 function showAllBirthdays() {
@@ -107,7 +113,7 @@ function showOtherBirthdays(cmd) {
   var calendarMonth = birthdays.getOtherBirthdays(date.getDate(), date.getMonth(), cmd);
   var message = "";
 
-  if (!(helperFunctions.isEmpty(calendarMonth))) {
+  if (!(helper.isEmpty(calendarMonth))) {
     message = (cmd == "past" ? "Previous birthdays for this month:" : "Upcoming birthdays for the month:");
 
     for (var day in calendarMonth) {
