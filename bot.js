@@ -59,10 +59,22 @@ function showHelp() {
 
 function showTodayBirthdays() {
   var calendarMonth = birthdays.getTodayBirthdays();
-  var message = "";
+  var message = "Happy birthday ";
 
   if (!(helper.isEmpty(calendarMonth))) {
-    message = `Happy birthday ${calendarMonth}!`
+    if (typeof(calendarMonth) == 'object') {
+      for (let i = 0; i < calendarMonth.length; i++) {
+        if (i == calendarMonth.length - 1) {
+          message = message + ` and ${calendarMonth[i]}`;
+        } else if (i == 0) {
+          message = message + `${calendarMonth[i]}`;
+        } else {
+          message = message + `, ${calendarMonth[i]}`;
+        }
+      }
+    } else {
+      message = message + calendarMonth;
+    }
   } else {
     message = "There are no birthdays to show today."
   }
