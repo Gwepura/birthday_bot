@@ -54,6 +54,28 @@ function getBirthdaysByMonth(inputMonth) {
   }
 }
 
-// module.exports = { getAllBirthdays, getTodayBirthdays, getBirthdaysByMonth, getOtherBirthdays }
+function getOtherBirthdays(thisDay, monthPlaceHolder, cmd) {
+  var thisMonth = months[monthPlaceHolder];
+  let result = {};
 
-module.exports = { getAllBirthdays, getTodayBirthdays, getBirthdaysByMonth }
+  for(var month in calendar) {
+    if (!helper.isEmpty(calendar[month]) && month == thisMonth) {
+      for(var day in calendar[month]) {
+        if (cmd == 'next') {
+          if (parseInt(day) > thisDay) {
+            result[day] = calendar[month][day];
+          }
+        } else {
+          if (parseInt(day) < thisDay) {
+            result[day] = calendar[month][day];
+          }
+        }    
+      }
+      
+    }
+  }
+
+  return result;
+}
+
+module.exports = { getAllBirthdays, getTodayBirthdays, getBirthdaysByMonth, getOtherBirthdays }
