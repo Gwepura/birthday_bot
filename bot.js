@@ -102,19 +102,14 @@ function showBirthdaysByMonth(inputMonth) {
   var calendarMonth = birthdays.getBirthdaysByMonth(inputMonth);
   var message = "";
 
-  if (calendarMonth) {
-    if (typeof(calendarMonth) == 'object') {
-      message = `\n${inputMonth.toUpperCase()} birthdays: `;
+  if (typeof(calendarMonth) == 'object') {
+    message = `\n${inputMonth.toUpperCase()} birthdays: `;
 
-      for (var day in calendarMonth) {
-        message = message + formatBirthdayMessage(day, calendarMonth[day]);
-      }
-    } else {
-      message = calendarMonth;
+    for (var day in calendarMonth) {
+      message = message + formatBirthdayMessage(day, calendarMonth[day]);
     }
-    
   } else {
-    message = "Invalid month!";
+    message = calendarMonth;
   }
   
   return message;

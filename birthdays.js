@@ -3,7 +3,7 @@ const calendar = require('./birthday_calendar');
 const helper = require('./helperFunctions');
 
 function getAllBirthdays() {
-  var result = {};
+  let result = {};
   
   for (var month in calendar) {
     if (!helper.isEmpty(calendar[month])) {
@@ -17,7 +17,7 @@ function getTodayBirthdays() {
   var todayDate = new Date();
   var thisMonth = months[todayDate.getMonth()];
   var thisDay = todayDate.getDate();
-  var result;
+  let result;
 
   for(var month in calendar) {
     if (!helper.isEmpty(calendar[month]) && month == thisMonth) {
@@ -33,26 +33,27 @@ function getTodayBirthdays() {
   return result;
 }
 
-// function getBirthdaysByMonth(month) {
-//for (var month in calendar) {
-//   for (var day in calendar[month]) {
-//     let current_month = calendar[month];
-//     console.log(`${day}: ${current_month[day]}`);
-//   }
-//
-//
-// }
-// }
+function getBirthdaysByMonth(inputMonth) {
+  let result;
+  var validMonth = false;
 
+  for(var month in calendar) {
+    if (!helper.isEmpty(calendar[month]) && month == inputMonth.toLowerCase()) {
+     result = calendar[month]
+    } 
 
-// function isEmpty(obj) {
-//     for(var key in obj) {
-//         if(obj.hasOwnProperty(key))
-//             return false;
-//     }
-//     return true;
-// }
+    if (month == inputMonth.toLowerCase()) {
+      validMonth = true;
+    }
+  }
+
+  if (validMonth == true && !helper.isEmpty(result)) {
+    return result;
+  } else {
+    return validMonth == true ? 'No birthdays were found for the selected month.' : "Invalid month!";
+  }
+}
 
 // module.exports = { getAllBirthdays, getTodayBirthdays, getBirthdaysByMonth, getOtherBirthdays }
 
-module.exports = { getAllBirthdays, getTodayBirthdays, getAllBirthdays }
+module.exports = { getAllBirthdays, getTodayBirthdays, getBirthdaysByMonth }
