@@ -5,26 +5,45 @@ const help = require('./help');
 const birthdays = require('./birthdays');
 const helper = require('./helperFunctions');
 
-// const channel = client.channels.cache.get(process.env.CHANNEL_ID);
-const channel = client.channels.cache.get('723486374799474732D');
+
+// const channel = client.channels.cache.get('723486374799474732D');
 
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-
-  setInterval(checkTime, 60000);
-
+  console.log(process.env.CHANNEL_ID);
 });
+
+function startBirthdayBot() {
+  client.login();
+
+  var autoMessage = setInterval(checkTime () {
+    if (!helper.isEmpty(autoMessage)) {
+      return autoMessage;
+    }
+  }, 15000);
+  console.log('autoMessage: ',autoMessage);
+
+
+}
 
 function checkTime() {
   var today = new Date();
   var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-  if (currentTime.slice(0, 5) == '20:39') {
-    var message = showTodayBirthdays();
-
+  if (currentTime.slice(0, 5) == '10:57') {
+     message = showTodayBirthdays();
+     console.log(message);
+    //
     if (message != 'There are no birthdays to show today.') {
-      channel.cache.send('<message>');
+      console.log('message: ', message);
+      return message;
+    //   try {
+    //     var channel = client.channels.cache.get(`${process.env.CHANNEL_ID}`);
+    //     channel.send(`${message}`);
+    //   } catch (e) {
+    //     console.log("Error:\n", e);
+    //   }
     }
   }
   // if (currentTime.slice(0, 5))
@@ -64,6 +83,10 @@ client.on('message', msg => {
         break;
       case 'today':
         msg.reply(showTodayBirthdays());
+        break;
+      case 'login':
+        msg.reply(startBirthdayBot());
+        break;
     }
   }
 });
