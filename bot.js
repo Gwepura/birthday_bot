@@ -5,9 +5,31 @@ const help = require('./help');
 const birthdays = require('./birthdays');
 const helper = require('./helperFunctions');
 
+// const channel = client.channels.cache.get(process.env.CHANNEL_ID);
+const channel = client.channels.cache.get('723486374799474732D');
+
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
+
+  setInterval(checkTime, 60000);
+
 });
+
+function checkTime() {
+  var today = new Date();
+  var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+  if (currentTime.slice(0, 5) == '20:39') {
+    var message = showTodayBirthdays();
+
+    if (message != 'There are no birthdays to show today.') {
+      channel.cache.send('<message>');
+    }
+  }
+  // if (currentTime.slice(0, 5))
+
+}
 
 client.on('message', msg => {
   var message = msg.content;
@@ -80,7 +102,6 @@ function showTodayBirthdays() {
   }
 
   return message;
-
 }
 
 function showAllBirthdays() {
@@ -111,7 +132,7 @@ function showBirthdaysByMonth(inputMonth) {
   } else {
     message = calendarMonth;
   }
-  
+
   return message;
 }
 

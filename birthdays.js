@@ -4,7 +4,7 @@ const helper = require('./helperFunctions');
 
 function getAllBirthdays() {
   let result = {};
-  
+
   for (var month in calendar) {
     if (!helper.isEmpty(calendar[month])) {
       result[month] = (calendar[month]);
@@ -16,7 +16,8 @@ function getAllBirthdays() {
 function getTodayBirthdays() {
   var todayDate = new Date();
   var thisMonth = months[todayDate.getMonth()];
-  var thisDay = todayDate.getDate();
+  // var thisDay = todayDate.getDate();
+  var thisDay = 10;
   let result;
 
   for(var month in calendar) {
@@ -27,7 +28,7 @@ function getTodayBirthdays() {
           break;
         }
       }
-    } 
+    }
   }
 
   return result;
@@ -40,7 +41,7 @@ function getBirthdaysByMonth(inputMonth) {
   for(var month in calendar) {
     if (!helper.isEmpty(calendar[month]) && month == inputMonth.toLowerCase()) {
      result = calendar[month]
-    } 
+    }
 
     if (month == inputMonth.toLowerCase()) {
       validMonth = true;
@@ -69,9 +70,9 @@ function getOtherBirthdays(thisDay, monthPlaceHolder, cmd) {
           if (parseInt(day) < thisDay) {
             result[day] = calendar[month][day];
           }
-        }    
+        }
       }
-      
+
     }
   }
 
