@@ -33,7 +33,7 @@ function autoBirthday() {
       var today = new Date();
       var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   
-      if (currentTime.slice(0, 5) == '17:18') {
+      if (currentTime.slice(0, 5) == '08:20') {
        message = showTodayBirthdays();
       
         if (message != 'There are no birthdays to show today.') {
