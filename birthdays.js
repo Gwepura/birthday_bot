@@ -16,8 +16,8 @@ function getAllBirthdays() {
 function getTodayBirthdays() {
   var todayDate = new Date();
   var thisMonth = months[todayDate.getMonth()];
-  // var thisDay = todayDate.getDate();
-  var thisDay = 10;
+  var thisDay = todayDate.getDate();
+  // var thisDay = 10;
   let result;
 
   for(var month in calendar) {
