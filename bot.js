@@ -5,47 +5,6 @@ const help = require('./help');
 const birthdays = require('./birthdays');
 const helper = require('./helperFunctions');
 
-
-client.on('ready', () => {
-  client.login();
-  console.log(`Logged in as ${client.user.tag}`);
-  client.channels.cache.get(`723486374799474732`).send('birthday_bot has arrived!');
-  
-  let autoMessage = autoBirthday();
-
-  autoMessage.then(
-    // message => client.channels.cache.get(`${process.env.CHANNEL_ID}`).send(`${message}`),
-    // error => console.log(`Error: ${error}`)
-
-    message => {
-      client.channels.cache.get(`723486374799474732`).send(`${message}`)
-    }
-  ).catch(
-    console.log('Test: ', error)
-  );
-});
-
-function autoBirthday() {
-  var message = "";
-
-  return new Promise(function(resolve, reject) {
-    setInterval(function() {
-      var today = new Date();
-      var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  
-      if (currentTime.slice(0, 4) == '9:00') {
-       message = showTodayBirthdays();
-      
-        if (message != 'There are no birthdays to show today.') {
-          resolve(message);
-        } else {
-          reject(new Error('No birthdays found'));
-        }
-      }
-    }, 15000);
-  });
-}
-
 client.on('message', msg => {
   var message = msg.content;
 
